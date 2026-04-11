@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitHub Jekyll Themes - My Notes</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+        
+        .content {
+            padding: 40px 20px;
+        }
+        
+        .theme-item {
+            margin-bottom: 30px;
+            padding: 20px;
+            border-left: 5px solid #667eea;
+            background: #f8f9fa;
+            border-radius: 5px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .theme-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.2);
+        }
+        
+        .theme-item h2 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 1.5em;
+        }
+        
+        .theme-item p {
+            color: #666;
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+        
+        .code-block {
+            background: #2c3e50;
+            color: #ecf0f1;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 0.95em;
+            line-height: 1.5;
+            margin-bottom: 10px;
+        }
+        
+        .code-label {
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 8px;
+            font-size: 0.9em;
+        }
+        
+        .theme-number {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            line-height: 35px;
+            text-align: center;
+            margin-right: 10px;
+            font-weight: bold;
+        }
+        
+        .info-box {
+            background: #e3f2fd;
+            border-left: 4px solid #2196F3;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 4px;
+        }
+        
+        .info-box p {
+            color: #1976D2;
+            margin: 0;
+            line-height: 1.6;
+        }
+        
+        footer {
+            background: #f8f9fa;
+            padding: 20px;
+            text-align: center;
+            color: #999;
+            border-top: 1px solid #eee;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>GitHub Jekyll Themes</h1>
+            <p>My Notes - Guida ai temi Jekyll e come implementarli</p>
+        </div>
+        
+        <div class="content">
+            <div class="info-box">
+                <p><strong>Nota:</strong> Questi temi Jekyll possono essere utilizzati per personalizzare i tuoi repository GitHub o siti statici. I codici forniti mostrano come configurarli nel file. Se hai un file index.md allora questi temi sovrascrivono il codice, altrimenti se il file è .html come in questo sito non funziona perché la pagina è già scritta in quel formato<code>_config.yml</code>.</p>
+            </div>
+            
+            <!-- Theme 1: Cayman -->
+            <div class="theme-item">
+                <h2><span class="theme-number">1</span>Cayman</h2>
+                <p><strong>Descrizione:</strong> Un tema minimalista e pulito con un design moderno. Perfetto per progetti di documentazione e portfolio personali.</p>
+                <div class="code-label">Configuration (_config.yml):</div>
+                <div class="code-block">
+theme: jekyll-theme-cayman
+title: My Notes
+                </div>
+                <div class="code-label">Link ufficiale:</div>
+                <div class="code-block">
+https://github.com/pages-themes/cayman
+                </div>
+            </div>
+            
+            <!-- Theme 2: Modernist -->
+            <div class="theme-item">
+                <h2><span class="theme-number">2</span>Modernist</h2>
+                <p><strong>Descrizione:</strong> Un tema elegante e contemporaneo con layout a due colonne. Ideale per blog e progetti di ricerca.</p>
+                <div class="code-label">Configuration (_config.yml):</div>
+                <div class="code-block">
+theme: jekyll-theme-modernist
+title: My Project
+                </div>
+                <div class="code-label">Link ufficiale:</div>
+                <div class="code-block">
+https://github.com/pages-themes/modernist
+                </div>
+            </div>
+            
+            <!-- Theme 3: Midnight -->
+            <div class="theme-item">
+                <h2><span class="theme-number">3</span>Midnight</h2>
+                <p><strong>Descrizione:</strong> Un tema scuro e sofisticato con sfondo nero. Perfetto per progetti tech e siti stravaganti.</p>
+                <div class="code-label">Configuration (_config.yml):</div>
+                <div class="code-block">
+theme: jekyll-theme-midnight
+title: My Project
+                </div>
+                <div class="code-label">Link ufficiale:</div>
+                <div class="code-block">
+https://github.com/pages-themes/midnight
+                </div>
+            </div>
+            
+            <!-- Theme 4: Hacker -->
+            <div class="theme-item">
+                <h2><span class="theme-number">4</span>Hacker</h2>
+                <p><strong>Descrizione:</strong> Un tema con stile "hacker" con sfondo scuro e evidenziazione del codice. Ideale per developer e progetti open-source.</p>
+                <div class="code-label">Configuration (_config.yml):</div>
+                <div class="code-block">
+theme: jekyll-theme-hacker
+title: My Project
+                </div>
+                <div class="code-label">Link ufficiale:</div>
+                <div class="code-block">
+https://github.com/pages-themes/hacker
+                </div>
+            </div>
+            
+            <!-- Theme 5: Slate -->
+            <div class="theme-item">
+                <h2><span class="theme-number">5</span>Slate</h2>
+                <p><strong>Descrizione:</strong> Un tema scuro e professionale con design moderno. Perfetto per documentazione tecnica e API docs.</p>
+                <div class="code-label">Configuration (_config.yml):</div>
+                <div class="code-block">
+theme: jekyll-theme-slate
+title: My Project
+                </div>
+                <div class="code-label">Link ufficiale:</div>
+                <div class="code-block">
+https://github.com/pages-themes/slate
+                </div>
+            </div>
+            
+            <!-- Guide Header -->
+            <div style="margin-top: 40px; padding-top: 40px; border-top: 2px solid #eee;">
+                <h3 style="color: #667eea; margin-bottom: 20px;">📖 Come Usare i Temi</h3>
+                
+                <div class="theme-item">
+                    <h4 style="color: #333; margin-bottom: 10px;">Passo 1: Crea il file _config.yml</h4>
+                    <p>Nella root del repository, crea un file <code>_config.yml</code>:</p>
+                    <div class="code-block">
+# Seleziona uno dei temi sopra
+theme: jekyll-theme-cayman
+title: My Notes
+description: La mia collezione di appunti
+                    </div>
+                </div>
+                
+                <div class="theme-item">
+                    <h4 style="color: #333; margin-bottom: 10px;">Passo 2: Abilita GitHub Pages</h4>
+                    <ol style="color: #666; line-height: 1.8;">
+                        <li>Vai in Impostazioni del repository → Pages</li>
+                        <li>Seleziona il branch (di solito <code>main</code>)</li>
+                        <li>GitHub Pages Build and Deploy se non automatico</li>
+                        <li>Attendi qualche minuto per il deploy</li>
+                    </ol>
+                </div>
+                
+                <div class="theme-item">
+                    <h4 style="color: #333; margin-bottom: 10px;">Passo 3: Personalizza il Contenuto</h4>
+                    <p>Crea pagine in formato Markdown (.md) o HTML</p>
+                    <div class="code-block">
+# Esempio: README.md
+## Welcome to My Notes
+
+Contenuto della pagina principale...
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <footer>
+            <p>GitHub Jekyll Themes - My Notes | Última actualización: Abril 2026</p>
+        </footer>
+    </div>
+</body>
+</html>
