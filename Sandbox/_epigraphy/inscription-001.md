@@ -4,7 +4,7 @@ layout: record
 material: marmo
 provenance: Roma
 findspot: Via Appia
-date: I sec. d.C.
+chronology: I sec. d.C.
 language: latino
 type: funeraria
 ---
