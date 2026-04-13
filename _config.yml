@@ -53,8 +53,11 @@ plugins:
 #   - vendor/cache/
 #   - vendor/gems/
 #   - vendor/ruby/
+title: cs-notes
+
+url: "https://ac-inscript.github.io"
+baseurl: "/cs-notes"
+
 collections:
   epigraphy:
     output: true
-    baseurl: "/cs-notes/Sandbox"
-url: "https://ac-inscript.github.io"
