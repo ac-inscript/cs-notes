@@ -1,22 +1,66 @@
-!DOCTYPE html>
+!Doctype html>
 <html lang="it">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Archivio Epigrafico</title>
+    <title>Epigraphic Archive</title>
+    <style>
+        body {
+            font-family: 'Tahoma', Geneva, Verdana, sans-serif;
+            background: #f0f0f0;
+            color: #333;
+            padding: 20px;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            padding: 30px;
+        }
+        h1 {
+            border-bottom: 2px solid #ccc;
+        }
+        .meta {
+            background: #f5f5f5;
+            padding: 10px;
+            margin: 15px 0;
+        }
+        .text {
+            white-space: pre-line;
+            font-size: 1.1em;
+        }
+    </style>
 </head>
 <body>
-    <h1>📜 Tutte le iscrizioni</h1>
-
-    <p><a href="/search.html">🔍 Cerca nel corpus</a></p>
-
-<ul>
-{% for rec in site.epigraphy %}
-  <li>
-    <a href="{{ rec.url }}">{{ rec.title }}</a>
-    ({{ rec.provenance }}, {{ rec.material }})
-  </li>
-{% endfor %}
-</ul>  
+<div class="container">
+    <h1>Epigraphic Archive</h1>
+    <p>Welcome to the epigraphic archive. Here you can explore a collection of inscriptions with detailed metadata and transcriptions.</p>
+    <ul>
+        {% for rec in site.epigraphy %}
+        <li><a href="{{ rec.url }}">{{ rec.title }}</a></li>
+        {% endfor %}
+    </ul>
+    ---
+<h2>Iscrizione 001</h2>
+<div class="meta"> 
+  <p><strong>Material:</strong> marmo</p>
+  <p><strong>Provenance:</strong> Roma</p>
+  <p><strong>Date:</strong> I sec. d.C.</p>
+  <p><strong>Language:</strong> latino</p>
+  <p><strong>Type:</strong> funeraria</p>
+  <p><strong>Findspot:</strong> Via Appia</p>
+</div>
+<h2>Iscrizione 002</h2>
+<div class="meta"> 
+  <p><strong>Material:</strong> marmo</p>
+  <p><strong>Provenance:</strong> Roma</p>
+  <p><strong>Date:</strong> I sec. d.C.</p>
+  <p><strong>Language:</strong> latino</p>
+  <p><strong>Type:</strong> sacra</p>
+  <p><strong>Findspot:</strong> Via Appia</p>
+<div class="text"></div>
+</div>
 </body>
 </html>
