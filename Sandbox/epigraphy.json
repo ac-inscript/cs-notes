@@ -1,19 +1,18 @@
 ---
-layout: none
+layout: null
 ---
-
-[
-{% for rec in site.epigraphy %}
+{% assign items = site.epigraphy %}[
+{% for rec in items %}
 {
-  "title": "{{ rec.title }}",
-  "url": "{{ rec.url }}",
-  "material": "{{ rec.material }}",
-  "provenance": "{{ rec.provenance }}",
-  "findspot": "{{ rec.findspot }}",
-  "date": "{{ rec.date }}",
-  "language": "{{ rec.language }}",
-  "type": "{{ rec.type }}",
-  "text": {{ rec.content | jsonify }}
+  "title": {{ rec.title | jsonify }},
+  "url": {{ rec.url | jsonify }},
+  "material": {{ rec.material | jsonify }},
+  "provenance": {{ rec.provenance | jsonify }},
+  "findspot": {{ rec.findspot | jsonify }},
+  "chronology": {{ rec.chronology | jsonify }},
+  "language": {{ rec.language | jsonify }},
+  "type": {{ rec.type | jsonify }},
+  "text": {{ rec.content | strip_newlines | jsonify }}
 }{% unless forloop.last %},{% endunless %}
 {% endfor %}
 ]
