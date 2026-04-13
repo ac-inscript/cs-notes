@@ -14,10 +14,9 @@ title: Epigraphic Archive
         <ul>
             {% for rec in site.epigraphy %}
                 <li>
-                    <a href="{{ rec.url }}">
+                    <a href="{{ rec.url | relative_url }}">
                         <strong>{{ rec.title }}</strong>
                     </a>
-
                     <br>
 
                     <small>
