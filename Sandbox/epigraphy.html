@@ -34,33 +34,43 @@
     </style>
 </head>
 <body>
+---
+layout: default
+title: Epigraphic Archive
+---
+
 <div class="container">
+
     <h1>Epigraphic Archive</h1>
-    <p>Welcome to the epigraphic archive. Here you can explore a collection of inscriptions with detailed metadata and transcriptions.</p>
-    <ul>
-        {% for rec in site.epigraphy %}
-        <li><a href="{{ rec.url }}">{{ rec.title }}</a></li>
-        {% endfor %}
-    </ul>
-    ---
-<h2>Iscrizione 001</h2>
-<div class="meta"> 
-  <p><strong>Material:</strong> marmo</p>
-  <p><strong>Provenance:</strong> Roma</p>
-  <p><strong>Date:</strong> I sec. d.C.</p>
-  <p><strong>Language:</strong> latino</p>
-  <p><strong>Type:</strong> funeraria</p>
-  <p><strong>Findspot:</strong> Via Appia</p>
-</div>
-<h2>Iscrizione 002</h2>
-<div class="meta"> 
-  <p><strong>Material:</strong> marmo</p>
-  <p><strong>Provenance:</strong> Roma</p>
-  <p><strong>Date:</strong> I sec. d.C.</p>
-  <p><strong>Language:</strong> latino</p>
-  <p><strong>Type:</strong> sacra</p>
-  <p><strong>Findspot:</strong> Via Appia</p>
-<div class="text"></div>
+
+    <p>
+        Browse the collection of inscriptions.
+    </p>
+
+    {% if site.epigraphy and site.epigraphy.size > 0 %}
+
+        <ul>
+            {% for rec in site.epigraphy %}
+                <li>
+                    <a href="{{ rec.url }}">
+                        <strong>{{ rec.title }}</strong>
+                    </a>
+
+                    {% if rec.provenance or rec.date or rec.material %}
+                        <br>
+                        <small>
+                            {{ rec.provenance }}{% if rec.material %} | {{ rec.material }}{% endif %}{% if rec.date %} | {{ rec.date }}{% endif %}
+                        </small>
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+
+    {% else %}
+
+        <p>No inscriptions found.</p>
+
+    {% endif %}
 </div>
 </body>
 </html>
