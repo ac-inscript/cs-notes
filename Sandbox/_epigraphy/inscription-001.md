@@ -1,5 +1,6 @@
 ---
 title: Iscrizione 001
+layout: record
 material: marmo
 provenance: Roma
 findspot: Via Appia
