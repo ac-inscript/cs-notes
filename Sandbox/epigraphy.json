@@ -1,19 +1,13 @@
----
-layout: none
----
-
 [
-{% for rec in site.epigraphy %}
-{
-  "title": "{{ rec.title }}",
-  "url": "{{ rec.url }}",
-  "material": "{{ rec.material }}",
-  "provenance": "{{ rec.provenance }}",
-  "findspot": "{{ rec.findspot }}",
-  "date": "{{ rec.date }}",
-  "language": "{{ rec.language }}",
-  "type": "{{ rec.type }}",
-  "text": {{ rec.content | jsonify }}
-}{% unless forloop.last %},{% endunless %}
-{% endfor %}
+  {
+    "title": "Iscrizione 001",
+    "url": "/epigraphy/inscription-001.html",
+    "material": "marmo",
+    "provenance": "Roma",
+    "findspot": "Via Appia",
+    "date": "I sec. d.C.",
+    "language": "latino",
+    "type": "funeraria",
+    "text": "D M\nL(ucius) Cornelius Felix\nvixit annis XXX\nhic situs est"
+  }
 ]
