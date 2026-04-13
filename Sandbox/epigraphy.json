@@ -1,0 +1,19 @@
+---
+layout: none
+---
+
+[
+{% for rec in site.epigraphy %}
+{
+  "title": "{{ rec.title }}",
+  "url": "{{ rec.url }}",
+  "material": "{{ rec.material }}",
+  "provenance": "{{ rec.provenance }}",
+  "findspot": "{{ rec.findspot }}",
+  "date": "{{ rec.date }}",
+  "language": "{{ rec.language }}",
+  "type": "{{ rec.type }}",
+  "text": {{ rec.content | jsonify }}
+}{% unless forloop.last %},{% endunless %}
+{% endfor %}
+]

@@ -1,0 +1,20 @@
+!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Archivio Epigrafico</title>
+</head>
+<body>
+    <h1>📜 Tutte le iscrizioni</h1>
+
+<ul>
+{% for rec in site.epigraphy %}
+  <li>
+    <a href="{{ rec.url }}">{{ rec.title }}</a>
+    ({{ rec.provenance }}, {{ rec.material }})
+  </li>
+{% endfor %}
+</ul>  
+</body>
+</html>

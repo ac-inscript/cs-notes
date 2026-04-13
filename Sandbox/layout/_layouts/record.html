@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>{{ page.title }}</title>
+
+  <style>
+    body {
+      font-family: Georgia, serif;
+      max-width: 800px;
+      margin: auto;
+      line-height: 1.6;
+    }
+
+    h1 {
+      border-bottom: 2px solid #ccc;
+    }
+
+    .meta {
+      background: #f5f5f5;
+      padding: 10px;
+      margin: 15px 0;
+    }
+
+    .text {
+      white-space: pre-line;
+      font-size: 1.1em;
+    }
+  </style>
+</head>
+<body>
+
+<h1>{{ page.title }}</h1>
+
+<div class="meta">
+  <p><strong>Materiale:</strong> {{ page.material }}</p>
+  <p><strong>Provenienza:</strong> {{ page.provenance }}</p>
+  <p><strong>Data:</strong> {{ page.date }}</p>
+</div>
+
+<div class="text">
+  {{ content }}
+</div>
+
+<hr>
+
+<a href="/epigraphy.html">← Torna all’archivio</a>
+
+</body>
+</html>
