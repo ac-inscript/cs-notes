@@ -56,3 +56,5 @@ plugins:
 collections:
   epigraphy:
     output: true
+    baseurl: "/cs-notes/Sandbox"
+url: "https://ac-inscript.github.io"
