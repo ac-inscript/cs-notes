@@ -7,6 +7,8 @@ title: Search
 
 <input type="text" id="searchBox" placeholder="Scrivi: Roma, marmo, Felix..." style="width:100%; padding:10px; font-size:16px;">
 
+<p id="resultCount" style="margin:10px 0; font-weight:bold;"></p>
+
 <ul id="results"></ul>
 
 <script>
@@ -35,17 +37,29 @@ fetch('/epigraphy.json')
     render(data)
 
     document.getElementById('searchBox').addEventListener('input', function () {
-      const q = this.value.toLowerCase()
+      const q = this.value.toLowerCase().trim()
+
+      if (q === '') {
+        render(data)
+        return
+      }
 
       const filtered = data.filter(item =>
         (item.title || '').toLowerCase().includes(q) ||
         (item.provenance || '').toLowerCase().includes(q) ||
         (item.material || '').toLowerCase().includes(q) ||
+        (item.findspot || '').toLowerCase().includes(q) ||
+        (item.language || '').toLowerCase().includes(q) ||
+        (item.type || '').toLowerCase().includes(q) ||
         (item.date || '').toLowerCase().includes(q) ||
         (item.text || '').toLowerCase().includes(q)
       )
 
       render(filtered)
+
+      // Mostra conteggio risultati
+      const count = document.getElementById('resultCount')
+      count.textContent = `${filtered.length} risultato${filtered.length !== 1 ? 'i' : ''} trovato${filtered.length !== 1 ? 'i' : ''}`
     })
 
   })
