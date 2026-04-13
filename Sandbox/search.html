@@ -1,0 +1,52 @@
+---
+layout: default
+title: Search
+---
+
+<h1>🔍 Cerca nel corpus epigrafico</h1>
+
+<input type="text" id="searchBox" placeholder="Scrivi: Roma, marmo, Felix..." style="width:100%; padding:10px; font-size:16px;">
+
+<ul id="results"></ul>
+
+<script>
+fetch('/epigraphy.json')
+  .then(res => res.json())
+  .then(data => {
+
+    const resultsBox = document.getElementById('results')
+
+    function render(list) {
+      resultsBox.innerHTML = ''
+
+      list.forEach(item => {
+        const li = document.createElement('li')
+
+        li.innerHTML = `
+          <a href="${item.url}"><strong>${item.title}</strong></a><br>
+          ${item.provenance || ''} | ${item.material || ''} | ${item.date || ''}
+        `
+
+        resultsBox.appendChild(li)
+      })
+    }
+
+    // mostra tutto all'inizio
+    render(data)
+
+    document.getElementById('searchBox').addEventListener('input', function () {
+      const q = this.value.toLowerCase()
+
+      const filtered = data.filter(item =>
+        (item.title || '').toLowerCase().includes(q) ||
+        (item.provenance || '').toLowerCase().includes(q) ||
+        (item.material || '').toLowerCase().includes(q) ||
+        (item.date || '').toLowerCase().includes(q) ||
+        (item.text || '').toLowerCase().includes(q)
+      )
+
+      render(filtered)
+    })
+
+  })
+</script>
