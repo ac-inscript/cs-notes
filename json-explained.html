@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>JavaScript Basics Guide</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #f4f8ff;
+      color: #0a1f44;
+    }
+
+    header {
+      background-color: #0a3d91;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+
+    section {
+      background-color: white;
+      margin: 20px auto;
+      padding: 20px;
+      max-width: 800px;
+      border-left: 6px solid #0a3d91;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      color: #0a3d91;
+    }
+
+    code {
+      background-color: #e6ecff;
+      padding: 3px 6px;
+      border-radius: 4px;
+    }
+
+    pre {
+      background-color: #0a1f44;
+      color: #ffffff;
+      padding: 10px;
+      overflow-x: auto;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>JavaScript Basics</h1>
+  <p>Understanding the core concepts of JavaScript and the DOM</p>
+</header>
+
+<section>
+  <h2>What is the DOM?</h2>
+  <p>
+    The DOM (Document Object Model) is a tree-like representation of an HTML page.
+    It allows JavaScript to access and modify elements dynamically.
+  </p>
+
+  <pre>
+document
+ └── body
+      ├── h1
+      └── p
+  </pre>
+</section>
+
+<section>
+  <h2>document</h2>
+  <p>
+    The <code>document</code> object represents the entire web page.
+    It is used to access elements inside the DOM.
+  </p>
+
+  <pre>
+document.getElementById("myElement");
+  </pre>
+</section>
+
+<section>
+  <h2>element</h2>
+  <p>
+    An <code>element</code> is a specific part of the page, like a paragraph,
+    input field, or div. You can modify it using JavaScript.
+  </p>
+
+  <pre>
+const element = document.getElementById("demo");
+element.textContent = "Hello World";
+  </pre>
+</section>
+
+<section>
+  <h2>const</h2>
+  <p>
+    <code>const</code> is used to declare variables that cannot be reassigned.
+    It is the preferred way to define values that do not change.
+  </p>
+
+  <pre>
+const name = "Anna";
+  </pre>
+</section>
+
+<section>
+  <h2>let</h2>
+  <p>
+    <code>let</code> is used for variables that can change over time.
+    It is useful for counters or dynamic values.
+  </p>
+
+  <pre>
+let count = 0;
+count = count + 1;
+  </pre>
+</section>
+
+<section>
+  <h2>textContent vs innerText</h2>
+  <p>
+    Both are used to change text inside an element.
+  </p>
+  <ul>
+    <li><code>textContent</code>: faster, returns all text</li>
+    <li><code>innerText</code>: respects visual layout</li>
+  </ul>
+
+  <pre>
+element.textContent = "New text";
+  </pre>
+</section>
+
+<section>
+  <h2>Events (click)</h2>
+  <p>
+    JavaScript can respond to user actions like clicks.
+  </p>
+
+  <pre>
+button.onclick = function() {
+  alert("Clicked!");
+};
+  </pre>
+</section>
+
+<section>
+  <h2>Putting it all together</h2>
+  <p>
+    JavaScript reads input, processes it, and updates the DOM dynamically.
+  </p>
+
+  <pre>
+const input = document.getElementById("name").value;
+document.getElementById("output").textContent = input;
+  </pre>
+</section>
+
+</body>
+</html>
