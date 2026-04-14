@@ -49,26 +49,22 @@ function generate() {
   let type_object = document.getElementById("type_object").value;
   let place_creation = document.getElementById("place_creation").value;
   let place_discovery = document.getElementById("place_discovery").value;
-  let collection = document.getElementById("collection").value;
+  let chronology = document.getElementById("chronology").value;
   let material = document.getElementById("material").value;
-  let writing_system = document.getElementById("writing_system").value;
+  let language = document.getElementById("language").value;
+  let record = document.getElementById("record").value;
 
   let result =
 `## Epigraphic Record
 
-**Type of inscription:** ${type_inscription}
-
-**Type of object:** ${type_object}
-
-**Place of creation:** ${place_creation}
-
-**Place of discovery:** ${place_discovery}
-
-**Collection:** ${collection}
-
-**Material:** ${material}
-
-**Writing system:** ${writing_system}
+**title**: ${type_inscription}
+**layout**: ${record}
+**material**: ${material}
+**provenance**: ${place_creation}
+**findspot**: ${place_discovery}
+**chronology**: ${chronology}
+**language**: ${language}
+**type**: ${type_object}
 `;
 
   document.getElementById("output").innerText = result;
