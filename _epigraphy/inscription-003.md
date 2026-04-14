@@ -1,15 +1,11 @@
-## Epigraphic Record
-
-**Type of inscription:** Funerary
-
-**Type of object:** Ara
-
-**Place of creation:** Brescia
-
-**Place of discovery:** Brescia
-
-**Collection:** periit
-
-**Material:** Marmo
-
-**Writing system:** Latino
+---
+title: Funerary
+layout: record
+material: marmo
+provenance: Brescia
+findspot: Brescia
+chronology: I sec. d.C.
+language: Latino
+collection: periit
+type: Ara
+---
