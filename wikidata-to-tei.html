@@ -1,0 +1,216 @@
+---
+layout: default
+title: Wikidata to TEI Converter
+---
+
+<div class="container">
+    <h1>Wikidata to TEI XML Converter</h1>
+    <p>Inserisci l'ID di un'iscrizione da Wikidata (es. Q123456) per estrarre i dati e convertirli in formato TEI XML.</p>
+
+    <div class="input-section">
+        <label for="wikidata-id">ID Wikidata:</label>
+        <input type="text" id="wikidata-id" placeholder="Q123456" />
+        <button id="convert-btn">Converti</button>
+    </div>
+
+    <div id="loading" style="display: none;">Caricamento dati da Wikidata...</div>
+
+    <div id="result" style="display: none;">
+        <h2>Risultato TEI XML</h2>
+        <pre id="tei-output"></pre>
+        <button id="download-btn">Scarica XML</button>
+    </div>
+
+    <div id="error" style="display: none; color: red;"></div>
+</div>
+
+<script>
+document.getElementById('convert-btn').addEventListener('click', async function() {
+    const id = document.getElementById('wikidata-id').value.trim();
+    if (!id) {
+        showError('Inserisci un ID Wikidata valido.');
+        return;
+    }
+
+    showLoading(true);
+    hideResult();
+    hideError();
+
+    try {
+        const data = await fetchWikidataItem(id);
+        const teiXml = convertToTEI(data);
+        showResult(teiXml);
+    } catch (error) {
+        showError('Errore nel recupero dei dati: ' + error.message);
+    } finally {
+        showLoading(false);
+    }
+});
+
+document.getElementById('download-btn').addEventListener('click', function() {
+    const xml = document.getElementById('tei-output').textContent;
+    const blob = new Blob([xml], { type: 'application/xml' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'inscription-tei.xml';
+    a.click();
+    URL.revokeObjectURL(url);
+});
+
+async function fetchWikidataItem(id) {
+    const url = `https://www.wikidata.org/wiki/Special:EntityData/${id}.json`;
+    const response = await fetch(url);
+    if (!response.ok) {
+        throw new Error('Item non trovato');
+    }
+    const data = await response.json();
+    return data.entities[id];
+}
+
+function convertToTEI(item) {
+    const labels = item.labels || {};
+    const descriptions = item.descriptions || {};
+    const claims = item.claims || {};
+
+    // Estrai informazioni comuni per iscrizioni
+    const title = labels.it ? labels.it.value : (labels.en ? labels.en.value : item.id);
+    const description = descriptions.it ? descriptions.it.value : (descriptions.en ? descriptions.en.value : '');
+
+    // Mappa proprietà Wikidata a TEI
+    const inscriptionText = getClaimValue(claims, 'P12888') || ''; // inscription (text)
+    const material = getClaimValue(claims, 'P186') || ''; // material used
+    const location = getClaimValue(claims, 'P276') || ''; // location
+    const date = getClaimValue(claims, 'P571') || ''; // inception
+    const language = getClaimValue(claims, 'P407') || ''; // language of work
+    const image = getClaimValue(claims, 'P18') || ''; // image
+
+    // Costruisci TEI XML
+    const tei = `<?xml version="1.0" encoding="UTF-8"?>
+<TEI xmlns="http://www.tei-c.org/ns/1.0">
+    <teiHeader>
+        <fileDesc>
+            <titleStmt>
+                <title>${escapeXml(title)}</title>
+                ${description ? `<title type="sub">${escapeXml(description)}</title>` : ''}
+            </titleStmt>
+            <publicationStmt>
+                <p>Converted from Wikidata item ${item.id}</p>
+            </publicationStmt>
+            <sourceDesc>
+                <p>Wikidata: <ref target="https://www.wikidata.org/wiki/${item.id}">${item.id}</ref></p>
+            </sourceDesc>
+        </fileDesc>
+        <profileDesc>
+            <textClass>
+                <keywords>
+                    ${material ? `<term>${escapeXml(material)}</term>` : ''}
+                    ${language ? `<term>${escapeXml(language)}</term>` : ''}
+                </keywords>
+            </textClass>
+        </profileDesc>
+    </teiHeader>
+    <text>
+        <body>
+            <div type="edition">
+                ${inscriptionText ? `<ab>${escapeXml(inscriptionText)}</ab>` : ''}
+            </div>
+            ${image ? `<div type="facsimile"><figure><graphic url="${escapeXml(image)}"/></figure></div>` : ''}
+            <div type="metadata">
+                ${location ? `<p>Location: ${escapeXml(location)}</p>` : ''}
+                ${date ? `<p>Date: ${escapeXml(date)}</p>` : ''}
+            </div>
+        </body>
+    </text>
+</TEI>`;
+
+    return tei;
+}
+
+function getClaimValue(claims, propertyId) {
+    const claim = claims[propertyId];
+    if (!claim || !claim[0]) return '';
+    const mainsnak = claim[0].mainsnak;
+    if (mainsnak && mainsnak.datavalue) {
+        if (mainsnak.datavalue.type === 'string') {
+            return mainsnak.datavalue.value;
+        } else if (mainsnak.datavalue.type === 'wikibase-entityid') {
+            return mainsnak.datavalue.value.id;
+        } else if (mainsnak.datavalue.type === 'time') {
+            return mainsnak.datavalue.value.time;
+        }
+    }
+    return '';
+}
+
+function escapeXml(unsafe) {
+    return unsafe.replace(/[<>&'"]/g, function (c) {
+        switch (c) {
+            case '<': return '&lt;';
+            case '>': return '&gt;';
+            case '&': return '&amp;';
+            case "'": return '&#39;';
+            case '"': return '&quot;';
+        }
+    });
+}
+
+function showLoading(show) {
+    document.getElementById('loading').style.display = show ? 'block' : 'none';
+}
+
+function hideResult() {
+    document.getElementById('result').style.display = 'none';
+}
+
+function showResult(xml) {
+    document.getElementById('tei-output').textContent = xml;
+    document.getElementById('result').style.display = 'block';
+}
+
+function hideError() {
+    document.getElementById('error').style.display = 'none';
+}
+
+function showError(message) {
+    document.getElementById('error').textContent = message;
+    document.getElementById('error').style.display = 'block';
+}
+</script>
+
+<style>
+.input-section {
+    margin: 20px 0;
+}
+
+input {
+    padding: 8px;
+    margin-right: 10px;
+    width: 200px;
+}
+
+button {
+    padding: 8px 16px;
+    background-color: #667eea;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #5a67d8;
+}
+
+pre {
+    background-color: #f4f4f4;
+    padding: 10px;
+    border: 1px solid #ddd;
+    overflow-x: auto;
+    max-height: 400px;
+}
+
+#loading {
+    color: #667eea;
+    font-style: italic;
+}
+</style>
