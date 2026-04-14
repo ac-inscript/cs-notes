@@ -80,15 +80,17 @@
       const result = 
 `## Epigraphic Record
 
-**title**: ${type_inscription}
-**layout**: ${record}
-**material**: ${material}
-**provenance**: ${place_creation}
-**findspot**: ${place_discovery}
-**chronology**: ${chronology}
-**language**: ${language}
-**collection**: ${collection}
-**type**: ${type_object}
+---
+title: ${type_inscription}
+layout: ${record}
+material: ${material}
+provenance: ${place_creation}
+findspot: ${place_discovery}
+chronology: ${chronology}
+language: ${language}
+collection: ${collection}
+type: ${type_object}
+---
 `;
 
       document.getElementById("output").innerText = result;
