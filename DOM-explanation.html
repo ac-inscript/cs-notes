@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>DOM Guide</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #f4f8ff;
+      color: #0a1f44;
+    }
+
+    header {
+      background-color: #0a3d91;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+
+    section {
+      background-color: white;
+      margin: 20px auto;
+      padding: 20px;
+      max-width: 850px;
+      border-left: 6px solid #0a3d91;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      color: #0a3d91;
+    }
+
+    code {
+      background-color: #e6ecff;
+      padding: 3px 6px;
+      border-radius: 4px;
+    }
+
+    pre {
+      background-color: #0a1f44;
+      color: #ffffff;
+      padding: 12px;
+      overflow-x: auto;
+    }
+
+    ul {
+      line-height: 1.6;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>The DOM (Document Object Model)</h1>
+  <p>Understanding how JavaScript interacts with HTML</p>
+</header>
+
+<section>
+  <h2>What is the DOM?</h2>
+  <p>
+    The DOM (Document Object Model) is a structured representation of an HTML document.
+    The browser converts HTML into a tree of objects that JavaScript can read and modify.
+  </p>
+
+  <pre>
+document
+ └── html
+      └── body
+           ├── h1
+           └── p
+  </pre>
+</section>
+
+<section>
+  <h2>The DOM as a Tree</h2>
+  <p>
+    Each part of the HTML document becomes a node in the DOM tree.
+  </p>
+
+  <ul>
+    <li><strong>Element nodes</strong> (e.g. &lt;div&gt;, &lt;p&gt;)</li>
+    <li><strong>Text nodes</strong> (the text inside elements)</li>
+    <li><strong>Attribute nodes</strong> (like id or class)</li>
+  </ul>
+</section>
+
+<section>
+  <h2>Accessing Elements</h2>
+  <p>
+    JavaScript can find elements in the DOM using different methods.
+  </p>
+
+  <pre>
+document.getElementById("myId");
+document.querySelector(".className");
+document.querySelectorAll("p");
+  </pre>
+</section>
+
+<section>
+  <h2>Modifying Content</h2>
+  <p>
+    Once you select an element, you can change its content.
+  </p>
+
+  <pre>
+const el = document.getElementById("demo");
+el.textContent = "New text";
+  </pre>
+</section>
+
+<section>
+  <h2>Changing Styles</h2>
+  <p>
+    You can also modify CSS styles directly from JavaScript.
+  </p>
+
+  <pre>
+const el = document.getElementById("demo");
+el.style.color = "blue";
+el.style.fontSize = "20px";
+  </pre>
+</section>
+
+<section>
+  <h2>Creating Elements</h2>
+  <p>
+    JavaScript can create new elements dynamically.
+  </p>
+
+  <pre>
+const p = document.createElement("p");
+p.textContent = "Hello DOM";
+document.body.appendChild(p);
+  </pre>
+</section>
+
+<section>
+  <h2>Events</h2>
+  <p>
+    The DOM allows JavaScript to respond to user actions like clicks or typing.
+  </p>
+
+  <pre>
+const button = document.getElementById("btn");
+button.onclick = function() {
+  alert("Button clicked!");
+};
+  </pre>
+</section>
+
+<section>
+  <h2>Why the DOM is Important</h2>
+  <ul>
+    <li>Makes web pages interactive</li>
+    <li>Allows dynamic content updates</li>
+    <li>Connects HTML, CSS, and JavaScript</li>
+  </ul>
+</section>
+
+<section>
+  <h2>Example: Simple Interaction</h2>
+
+  <pre>
+&lt;input id="name"&gt;
+&lt;button onclick="show()"&gt;Show&lt;/button&gt;
+&lt;p id="output"&gt;&lt;/p&gt;
+
+function show() {
+  const value = document.getElementById("name").value;
+  document.getElementById("output").textContent = value;
+}
+  </pre>
+
+  <p>
+    This example shows how the DOM connects user input to visible output.
+  </p>
+</section>
+
+</body>
+</html>
