@@ -66,6 +66,7 @@
 
   <script>
     function generate() {
+      const title = document.getElementById("title").value;
       const type_inscription = document.getElementById("type_inscription").value;
       const type_object = document.getElementById("type_object").value;
       const place_creation = document.getElementById("place_creation").value;
@@ -79,7 +80,8 @@
       const result = 
 `
 ---
-title: ${type_inscription}
+title: ${title}
+type of inscription: ${type_inscription}
 layout: ${record}
 material: ${material}
 provenance: ${place_creation}

@@ -1,5 +1,6 @@
 ---
-title: Funerary
+title: Inscription 003
+type of inscription: funerary
 layout: record
 material: marmo
 provenance: Brescia

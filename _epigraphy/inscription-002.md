@@ -1,5 +1,6 @@
 ---
-title: Iscrizione 002
+title: Inscription 002
+type of inscription: sacer
 layout: record
 material: pietra
 provenance: Pompei

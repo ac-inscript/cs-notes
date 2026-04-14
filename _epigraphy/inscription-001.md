@@ -1,5 +1,6 @@
 ---
-title: Iscrizione 001
+title: Inscription 001
+type of inscription: funerary
 layout: record
 material: marmo
 provenance: Roma
