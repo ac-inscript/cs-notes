@@ -6,9 +6,14 @@ layout: null
 {% for rec in site.epigraphy %}
   {
     "title": "{{ rec.title | escape }}",
+    "type_object": "{{ rec.type_object | escape }}",
+    "collection": "{{ rec.collection | escape }}",
+    "type_inscription": "{{ rec.type_inscription | escape }}",
+    "findspot": "{{ rec.findspot | escape }}",
+    "language": "{{ rec.language | escape }}",
     "provenance": "{{ rec.provenance | escape }}",
     "material": "{{ rec.material | escape }}",
-    "date": "{{ rec.date | escape }}",
+    "chronology": "{{ rec.chronology | escape }}",
     "text": "{{ rec.content | strip_newlines | escape }}",
     "url": "{{ rec.url | relative_url }}"
   }{% unless forloop.last %},{% endunless %}
