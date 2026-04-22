@@ -7,7 +7,7 @@
     <style>
         body{
             margin: 0;
-            font-family: 'Tahoma', Geneva, Verdana, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: #ffd4d4;
             color: #333;
         }
@@ -37,12 +37,14 @@
         }
         .hero h1{
             margin: 0 0 12px;
+            text-align: center;
             font-size: 2.4rem;
             color: #700067;
             font-weight: bold;
         }
         .hero h2{
             margin: 0 0 12px;
+            text-align: center;
             font-size: 1.8rem;
             color: #ffffff;
         }
@@ -53,14 +55,14 @@
             font-weight: bold;
         }
         .section p{
-            margin: 0;
+            margin: 0 0 12px;
             color: #555;
             line-height: 1.6;
         }
         .links {
             list-style: none;
             padding: 0;
-            margin: 0;
+            margin: 0 0 12px;
         }
         .sparql-box {
             display: block;
@@ -79,6 +81,8 @@
         .sparql-box pre {
             margin: 0;
             white-space: pre-wrap;
+            padding-left: 2cm; /* Add 2cm left padding to start code away from margin */
+            text-align: justify; /* Justify the text, though for code it may stretch spaces */
         }
         .sparql-box code {
             /* Basic syntax highlighting for ShEx */
