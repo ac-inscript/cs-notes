@@ -85,8 +85,7 @@
         .sparql-box pre {
             margin: 0;
             white-space: pre-wrap;
-            padding-left: 2cm;
-            text-align: justify;
+            text-align: left;
         }
         .sparql-box code {
             color: #000;
@@ -140,100 +139,102 @@
                     </p>
                     <div class="sparql-box">
                     <pre><code>
-                    <span class="keyword">PREFIX</span> p: &lt;<span class="url">http://www.wikidata.org/prop/</span>&gt;
-                    <span class="keyword">PREFIX</span> ps: &lt;<span class="url">http://www.wikidata.org/prop/statement/</span>&gt;
-                    <span class="keyword">PREFIX</span> pq: &lt;<span class="url">http://www.wikidata.org/prop/qualifier/</span>&gt;
-                    <span class="keyword">PREFIX</span> psn: &lt;<span class="url">http://www.wikidata.org/prop/statement/value-normalized/</span>&gt;
-                    <span class="keyword">PREFIX</span> wd: &lt;<span class="url">http://www.wikidata.org/entity/</span>&gt;
-                    <span class="keyword">PREFIX</span> wdt: &lt;<span class="url">http://www.wikidata.org/prop/direct/</span>&gt;
-                    <span class="keyword">PREFIX</span> xsd: &lt;<span class="url">http://www.w3.org/2001/XMLSchema#</span>&gt;
-                    <span class="keyword">PREFIX</span> prov: &lt;<span class="url">http://www.w3.org/ns/prov#</span>&gt;
-                    <span class="keyword">PREFIX</span> psv: &lt;<span class="url">http://www.wikidata.org/prop/statement/value/</span>&gt;
-                    <span class="keyword">PREFIX</span> rdf: &lt;<span class="url">http://www.w3.org/1999/02/22-rdf-syntax-ns#</span>&gt;
-                    <span class="keyword">PREFIX</span> wikibase: &lt;<span class="url">http://wikiba.se/ontology#</span>&gt;
-                    <span class="comment"># QUERY MAP: SELECT ?item WHERE {?item wdt:P31 wd:Q220659.  ?item wdt:P5008 wd:Q114241199.}</span>
+<span class="keyword">PREFIX</span> wd: &lt;<span class="url">http://www.wikidata.org/entity/</span>&gt;
+<span class="keyword">PREFIX</span> wdt: &lt;<span class="url">http://www.wikidata.org/prop/direct/</span>&gt;
+<span class="keyword">SELECT</span> ?item <span class="keyword">WHERE</span> {
+  {
+    ?item <span class="property">wdt:P31</span> <span class="url">wd:Q1640824</span> .   <span class="comment"># inscription</span>
+  }
+  <span class="keyword">UNION</span>
+  {
+    ?item <span class="property">wdt:P31</span> <span class="url">wd:Q111326612</span> . <span class="comment"># inscribed object</span>
+  }
+  <span class="keyword">UNION</span>
+  {
+    ?item <span class="property">wdt:P31</span> <span class="url">wd:Q125323109</span> . <span class="comment"># honorary inscription</span>
+  }
+  <span class="keyword">UNION</span>
+  {
+    ?item <span class="property">wdt:P31</span> <span class="url">wd:Q125323760</span> . <span class="comment"># sacred inscription</span>
+  }
+  <span class="keyword">UNION</span>
+  {
+    ?item <span class="property">wdt:P31</span> <span class="url">wd:Q125323565</span> . <span class="comment"># boundary inscription</span>
+  }
 
-                    <span class="keyword">start</span> = @&lt;idea_artifact_inscription&gt;
+}
 
-                    &lt;idea_artifact_inscription&gt; {
-    
-                       <span class="comment"># instance of</span>
-                        <span class="property">p:P31</span> {        <span class="property">ps:P31</span> [ wd:Q220659 ]    } + ;
-                        <span class="comment"># genre</span>
-                        <span class="property">p:P136</span> {        <span class="property">ps:P136</span> [ &lt;<span class="url">http://www.wikidata.org/entity</span>&gt;~ ]} + ;
-                        <span class="comment"># image</span>
-                        <span class="property">p:P18</span> {        <span class="property">ps:P18</span> [ &lt;<span class="url">http://commons.wikimedia.org/wiki/Special:FilePath</span>&gt;~ ] ;    } + ;
-                        <span class="comment"># creator</span>
-                        <span class="property">p:P170</span> {        <span class="property">ps:P170</span> [ &lt;<span class="url">http://www.wikidata.org/.well-known/genid</span>&gt;~ ]} ; 
-                        <span class="comment"># depicts</span>
-                        <span class="property">p:P180</span>  {      <span class="property">ps:P180</span> [ &lt;<span class="url">http://www.wikidata.org/entity</span>&gt;~ ]   } + ;
-                        <span class="comment"># made from material</span>
-                        <span class="property">p:P186</span> {        <span class="property">ps:P186</span> [ &lt;<span class="url">http://www.wikidata.org/entity</span>&gt;~ ]    } + ;
-                        <span class="comment"># location of discovery</span>
-                        <span class="property">p:P189</span> {        <span class="property">ps:P189</span> [ wd:Q464266 ]    } + ;
-                        <span class="comment"># collection</span>
-                        <span class="property">p:P195</span> {        <span class="property">ps:P195</span> [ wd:Q1568434 ]    } ;
-                        <span class="comment"># inventory number</span>
-                        <span class="property">p:P217</span> {        <span class="property">ps:P217</span> xsd:string    } ;
-                        <span class="comment"># location</span>
-                        <span class="property">p:P276</span> {        <span class="property">ps:P276</span> [ wd:Q49145]    } ;
-                        <span class="comment"># inception</span>
-                        <span class="property">p:P571</span> {        <span class="property">ps:P571</span> [  ] ;
-                            <span class="property">psv:P571</span> [ &lt;<span class="url">http://www.wikidata.org/value</span>&gt;~ ] ?} + ; 
-                        <span class="comment"># inscription</span>   
-                        <span class="property">p:P1684</span> {        <span class="property">ps:P1684</span> rdf:langString ;    } + ;
-                        <span class="comment"># height</span>
-                        <span class="property">p:P2048</span> {
-                            <span class="property">psv:P2048</span> [ &lt;<span class="url">http://www.wikidata.org/value</span>&gt;~ ] ;
-                            <span class="comment"># height</span>
-                            <span class="property">psn:P2048</span> [ &lt;<span class="url">http://www.wikidata.org/value</span>&gt;~ ] ;
-                            <span class="comment"># height</span>
-                            <span class="property">ps:P2048</span> xsd:decimal
-                        } ;
-                        <span class="comment"># width</span>
-                        <span class="property">p:P2049</span> {
-                            <span class="comment"># width</span>
-                            <span class="property">psv:P2049</span> [ &lt;<span class="url">http://www.wikidata.org/value</span>&gt;~ ] ;
-                            <span class="comment"># width</span>
-                            <span class="property">psn:P2049</span> [ &lt;<span class="url">http://www.wikidata.org/value</span>&gt;~ ] ;
-                            <span class="comment"># width</span>
-                            <span class="property">ps:P2049</span> xsd:decimal
-                        } ;
-                        <span class="comment"># horizontal depth</span>
-                        <span class="property">p:P5524</span> {
-                            <span class="property">psv:P5524</span> [ &lt;<span class="url">http://www.wikidata.org/value</span>&gt;~ ] ;
-                            <span class="comment"># horizontal depth</span>
-                            <span class="property">psn:P5524</span> [ &lt;<span class="url">http://www.wikidata.org/value</span>&gt;~ ] ;
-                            <span class="comment"># horizontal depth</span>
-                            <span class="property">ps:P5524</span> xsd:decimal
-                        } ;
-                        <span class="comment"># copyright status</span>
-                        <span class="property">p:P6216</span> {        <span class="property">ps:P6216</span> [ wd:Q19652 ]    } ;
-                        <span class="comment"># Yale University Art Gallery ID</span>
-                        <span class="property">p:P8583</span> {        <span class="property">ps:P8583</span> xsd:string    } ;
-                        <span class="comment"># has part(s)</span>
-                        <span class="property">p:P527</span> {        <span class="property">ps:P527</span> [ &lt;<span class="url">http://www.wikidata.org/entity</span>&gt;~ ]    } ? ;
-                        <span class="comment"># language of work or name</span>
-                        <span class="property">p:P407</span> {        <span class="property">ps:P407</span> [ &lt;<span class="url">http://www.wikidata.org/entity</span>&gt;~ ]    } * ;
-                        <span class="comment"># described at URL</span>
-                        <span class="property">p:P973</span> {        <span class="property">ps:P973</span> [ &lt;<span class="url">https://db.edcs.eu/epigr</span>&gt;~ ]    } ? ;
-                        <span class="comment"># described by source</span>
-                        <span class="property">p:P1343</span> {        <span class="property">ps:P1343</span> [ &lt;<span class="url">http://www.wikidata.org/entity</span>&gt;~ ]    } ? ;
-                        <span class="comment"># dedicated to</span>
-                        <span class="property">p:P825</span> {        <span class="property">ps:P825</span> [ &lt;<span class="url">http://www.wikidata.org/entity</span>&gt;~ ]    } ? ;
-                        <span class="comment"># title</span>
-                        <span class="property">p:P1476</span> {        <span class="property">ps:P1476</span> rdf:langString } ? ;
-                        <span class="comment"># mass</span>
-                        <span class="property">p:P2067</span> {
-                            a [ wikibase:BestRank ] ;
-                            <span class="comment"># mass</span>
-                            <span class="property">psv:P2067</span> [ &lt;<span class="url">http://www.wikidata.org/value</span>&gt;~ ] ;
-                            <span class="comment"># mass</span>
-                            <span class="property">psn:P2067</span> [ &lt;<span class="url">http://www.wikidata.org/value</span>&gt;~ ] ;
-                            <span class="comment"># mass</span>
-                            <span class="property">ps:P2067</span> xsd:decimal
-                        } ?
-                    }
+<span class="comment"># QUERY MAP: SELECT ?item WHERE { { ?item wdt:P31 wd:Q1640824 } UNION { ?item wdt:P31 wd:Q111326612 } }</span>
+
+<span class="keyword">start</span> = @&lt;Epigraphy_project_inscription&gt;
+
+&lt;Epigraphy_project_inscription&gt; {
+<span class="comment"># instance of</span>
+    <span class="property">wdt:P31</span> [<span class="url">wd:Q1640824</span>]} <span class="comment">// rdfs:comment "Q109607  -->  inscription ; P31  -->  instance of";</span>
+    <span class="property">wdt:P31</span>  [<span class="url">wd:Q111326612</span>] <span class="comment">// rdfs:comment "Q111326612  -->  inscribed object ; P31  -->  instance of";</span>
+<span class="comment"># genre</span>	
+    <span class="property">wdt:P136</span> IRI ? ;
+<span class="comment"># image</span>
+    <span class="property">wdt:P18</span> IRI ? ;
+<span class="comment"># creator</span>
+    <span class="property">wdt:P170</span> IRI ? ;
+<span class="comment"># depicts</span>
+    <span class="property">wdt:P180</span> IRI ? ;
+<span class="comment"># made from material</span>
+    <span class="property">wdt:P186</span> IRI ? ;
+<span class="comment"># location of discovery</span>
+    <span class="property">wdt:189</span> IRI ? ;
+<span class="comment"># collection</span>
+    <span class="property">wdt:195</span> IRI ? ;
+<span class="comment"># inventory number</span>
+    <span class="property">wdt:P217</span> IRI ? ;
+<span class="comment"># location</span>
+    <span class="property">wdt:P276</span> IRI ? ; <span class="comment"># which one?</span>
+<span class="comment"># location of creation</span>
+    <span class="property">wdt:P1071</span> IRI ? ; <span class="comment"># which one?</span>
+<span class="comment"># inception</span>
+    <span class="property">wdt:P571</span> IRI ? ; <span class="comment">#how to insert min/max values?</span>
+<span class="comment"># text</span>
+    <span class="property">wdt:P1684</span> IRI + ; <span class="comment">#how to insert min/max values?</span>
+<span class="comment"># height</span>
+    <span class="property">wdt:P2048</span> xsd:decimal ? ; <span class="comment">#how to insert min/max values?</span>
+<span class="comment"># width</span>
+    <span class="property">wdt:P2049</span> xsd:decimal ? ; <span class="comment">#how to insert min/max values?</span>
+<span class="comment"># horizontal depth</span>
+    <span class="property">wdt:P5524</span> xsd:decimal ? ; <span class="comment">#how to insert min/max values?</span>
+<span class="comment"># height of letters</span>
+    <span class="property">wdt:P12549</span> xsd:decimal ? ; <span class="comment">#how to insert min/max values?</span>
+<span class="comment"># mass</span>
+    <span class="property">wdt:P2067</span> xsd:decimal ? ;
+<span class="comment"># copyright status</span>
+    <span class="property">wdt:P6216</span> [ <span class="url">wd:Q19652</span> ] ? ;
+<span class="comment"># Yale University Art Gallery ID</span>
+    <span class="property">wdt:P8583</span> xsd:string ;
+<span class="comment"># has part(s)</span>
+    <span class="property">wdt:P527</span> IRI ? ;
+<span class="comment"># language of work or name</span>
+    <span class="property">wdt:P407</span> IRI * ;
+<span class="comment"># writing system</span>
+    <span class="property">wdt:P282</span> IRI * ;
+<span class="comment"># described at URL</span>
+    <span class="property">wdt:P973</span> IRI ? ;
+<span class="comment"># described by source</span>
+    <span class="property">wdt:P1343</span> IRI ? ;
+<span class="comment"># dedicated to</span>
+    <span class="property">wdt:P825</span> IRI ? ;
+<span class="comment"># title</span>
+    <span class="property">wdt:P1476</span> rdf:langString ? ;
+<span class="comment"># state of transmission</span>
+    <span class="property">wdt:P12020</span> [ <span class="url">wd:Q122238694</span> <span class="url">wd:Q122238702</span> <span class="url">wd:Q122238708</span>] ?; <span class="comment">#aggiungere periit?</span>
+<span class="comment"># EDR ID</span>
+    <span class="property">wdt:P12495</span> xsd:string ? ;
+<span class="comment"># EDCS ID</span>
+    <span class="property">wdt:P11656</span> xsd:string ? ;
+<span class="comment"># EDH ID</span>
+    <span class="property">wdt:PP11273</span> xsd:string ? ;
+<span class="comment"># TM ID</span>
+    <span class="property">wdt:PP8532</span> xds:string ? ;
+}
                     </code></pre>
                     </div>                
                 <section class="section">
