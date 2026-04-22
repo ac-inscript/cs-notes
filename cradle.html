@@ -69,6 +69,25 @@
             padding: 0;
             margin: 0 0 12px;
         }
+        .link-boxes {
+            display: flex;
+            gap: 20px;
+        }
+        .link-box {
+            background: #eb9196;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            flex: 1;
+        }
+        .link-box a {
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .link-box a:hover {
+            text-decoration: underline;
+        }
         .sparql-box {
             display: block;
             max-width: 80%;
@@ -132,17 +151,24 @@
                 <img src="Toolforge.png" alt="Toolforge" style="width: 175px; height: auto;"><br>
             </header>
             <main class="content">
-                                <section class="section">
-                <h2>1. Cradle on GitHub</h2>
-                    <p>Information about the Cradle project on GitHub.</p>
-                    <ul class="links">
-                        <li><a href="https://github.com/magnusmanske/cradle">GitHub-Magnus</a></li>
-                        <li><a href="https://cradle.toolforge.org/#/">Cradle Website</a></li>
-                    </ul>
+                <section class="section">
+                    <div class="link-boxes">
+                        <div class="link-box">
+                            <a href="https://github.com/magnusmanske/cradle">GitHub-Magnus</a>
+                        </div>
+                        <div class="link-box">
+                            <a href="https://cradle.toolforge.org/#/">Cradle Website</a>
+                        </div>
+                    </div>
                 </section>
                 <section class="section">
-                    <h2>2. Mapping a ShEX</h2>
-                    <p>Example notes on mapping a ShEX schema to a Wikidata data model from the IDEA project.<br>
+                    <h2>What is Cradle?</h2>
+                    <p>Creating a Cradle...
+                    But what is Cradle? <br> Cradle is a tool developed by Magnus Manske for mapping RDF data models to SPARQL queries. It allows users to define mappings between RDF shapes and SPARQL queries, making it easier to extract and validate data from RDF datasets. <br> In simple terms, it helps ensure that the data entered into Wikidata (in this case, inscriptions) follows a consistent structure — for example, that all items include the same kind of information, such as a “findspot” or “place of discovery”. <br> The key difference is that while ShEx identifies errors after the data has been entered, Cradle helps prevent them in advance. <br> So, when you query the system for items matching this schema, it highlights anything that does not conform (quality control). <br> My goal is to build both a ShEx schema and a Cradle mapping. The ShEx will differ from <a href="https://www.wikidata.org/wiki/EntitySchema:E413">EntitySchema:E413</a>, although it will incorporate elements from IDEA and Altinum as well. However, Altinum is not directly compatible with Cradle.
+                    </p>
+                <section class="section">
+                    <h2>Ideal ShEX</h2>
+                    <p>This ShEX (in itinere) derives from IDEA and Altinum projects<br>
                     <a href="https://www.wikidata.org/wiki/EntitySchema:E413">EntitySchema:E413/Artifact with inscription</a>
                     </p>
                     <div class="sparql-box">
