@@ -25,64 +25,39 @@ title: Wikidata to TEI Converter
 </div>
 
 <script>
-document.getElementById('convert-btn').addEventListener('click', async function() {
-    const id = document.getElementById('wikidata-id').value.trim();
-    if (!id) {
-        showError('Inserisci un ID Wikidata valido.');
-        return;
+async function fetchWikidataItem(id) {
+    const url = `https://www.wikidata.org/wiki/Special:EntityData/${id}.json`;
+    const response = await fetch(url);
+    if (!response.ok) {
+        throw new Error('Failed to fetch Wikidata item');
     }
+    const data = await response.json();
+    return data.entities[id];
+}
 
-    showLoading(true);
-    hideResult();
-    hideError();
-
+async function getLabel(entityId) {
     try {
-        const data = await fetchWikidataItem(id);
-        const teiXml = convertToTEI(data);
-        showResult(teiXml);
-    } catch (error) {
-        showError('Error: ' + error.message);
-    } finally {
-        showLoading(false);
+        const item = await fetchWikidataItem(entityId);
+        return item.labels.it?.value || item.labels.en?.value || entityId;
+    } catch {
+        return entityId;
     }
-});
+}
 
-document.getElementById('download-btn').addEventListener('click', function() {
-    const xml = document.getElementById('tei-output').textContent;
-    const blob = new Blob([xml], { type: 'application/xml' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'inscription-tei.xml';
-    a.click();
-    URL.revokeObjectURL(url);
-});
-
-async function getClaimValue(claims, propertyId) {
-    const claim = claims[propertyId]
-    if (!claim || !claim[0]) return ''
-
-    const mainsnak = claim[0].mainsnak
-    if (!mainsnak || !mainsnak.datavalue) return ''
-
-    const value = mainsnak.datavalue.value
-
-    // entity (QID)
-    if (mainsnak.datavalue.type === 'wikibase-entityid') {
-        return await getLabel(value.id)
+function getClaimValue(claims, propertyId) {
+    const claim = claims[propertyId];
+    if (!claim || !claim[0]) return '';
+    const mainsnak = claim[0].mainsnak;
+    if (mainsnak && mainsnak.datavalue) {
+        if (mainsnak.datavalue.type === 'string') {
+            return mainsnak.datavalue.value;
+        } else if (mainsnak.datavalue.type === 'wikibase-entityid') {
+            return mainsnak.datavalue.value.id;
+        } else if (mainsnak.datavalue.type === 'time') {
+            return mainsnak.datavalue.value.time;
+        }
     }
-
-    // string
-    if (mainsnak.datavalue.type === 'string') {
-        return value
-    }
-
-    // time
-    if (mainsnak.datavalue.type === 'time') {
-        return value.time
-    }
-
-    return ''
+    return '';
 }
 
 function convertToTEI(item) {
@@ -101,7 +76,6 @@ function convertToTEI(item) {
     const date = getClaimValue(claims, 'P571') || ''; // inception
     const language = getClaimValue(claims, 'P407') || ''; // language of work
     const image = getClaimValue(claims, 'P18') || ''; // image
-    // how to handle qualifiers?
 
     // Costruisci TEI XML
     const tei = `<?xml version="1.0" encoding="UTF-8"?>
@@ -145,22 +119,6 @@ function convertToTEI(item) {
     return tei;
 }
 
-function getClaimValue(claims, propertyId) {
-    const claim = claims[propertyId];
-    if (!claim || !claim[0]) return '';
-    const mainsnak = claim[0].mainsnak;
-    if (mainsnak && mainsnak.datavalue) {
-        if (mainsnak.datavalue.type === 'string') {
-            return mainsnak.datavalue.value;
-        } else if (mainsnak.datavalue.type === 'wikibase-entityid') {
-            return mainsnak.datavalue.value.id;
-        } else if (mainsnak.datavalue.type === 'time') {
-            return mainsnak.datavalue.value.time;
-        }
-    }
-    return '';
-}
-
 function escapeXml(unsafe) {
     return String(unsafe).replace(/[<>&'"]/g, c => ({
         '<': '&lt;',
@@ -168,7 +126,7 @@ function escapeXml(unsafe) {
         '&': '&amp;',
         "'": '&#39;',
         '"': '&quot;'
-    }[c]))
+    }[c]));
 }
 
 function showLoading(show) {
@@ -192,6 +150,40 @@ function showError(message) {
     document.getElementById('error').textContent = message;
     document.getElementById('error').style.display = 'block';
 }
+
+// Event listeners
+document.getElementById('convert-btn').addEventListener('click', async function() {
+    const id = document.getElementById('wikidata-id').value.trim();
+    if (!id) {
+        showError('Inserisci un ID Wikidata valido.');
+        return;
+    }
+
+    showLoading(true);
+    hideResult();
+    hideError();
+
+    try {
+        const data = await fetchWikidataItem(id);
+        const teiXml = convertToTEI(data);
+        showResult(teiXml);
+    } catch (error) {
+        showError('Error: ' + error.message);
+    } finally {
+        showLoading(false);
+    }
+});
+
+document.getElementById('download-btn').addEventListener('click', function() {
+    const xml = document.getElementById('tei-output').textContent;
+    const blob = new Blob([xml], { type: 'application/xml' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'inscription-tei.xml';
+    a.click();
+    URL.revokeObjectURL(url);
+});
 </script>
 
 <style>
