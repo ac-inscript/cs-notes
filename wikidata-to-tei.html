@@ -5,7 +5,7 @@ title: Wikidata to TEI Converter
 
 <div class="container">
     <h1>Wikidata to TEI XML Converter</h1>
-    <p>Inserisci l'ID di un'iscrizione da Wikidata (es. Q123456) per estrarre i dati e convertirli in formato TEI XML.</p>
+    <p>Insert the Wikidata item ID to convert it to TEI XML (work in progress)</p>
 
     <div class="input-section">
         <label for="wikidata-id">ID Wikidata:</label>
@@ -59,13 +59,27 @@ document.getElementById('download-btn').addEventListener('click', function() {
 });
 
 async function fetchWikidataItem(id) {
-    const url = `https://www.wikidata.org/wiki/Special:EntityData/${id}.json`;
-    const response = await fetch(url);
+    const query = `
+    SELECT ?property ?propertyLabel ?value ?valueLabel WHERE {
+        wd:${id} ?property ?value .
+        SERVICE wikibase:label { bd:serviceParam wikibase:language "it,en". }
+    }`
+
+    const url = `https://query.wikidata.org/sparql?format=json&query=${encodeURIComponent(query)}`
+
+    const response = await fetch(url)
     if (!response.ok) {
-        throw new Error('Item not found');
+        throw new Error('Wikidata request failed')
     }
-    const data = await response.json();
-    return data.entities[id];
+
+    const data = await response.json()
+
+    return data.results.bindings.map(b => ({
+        property: b.property.value,
+        propertyLabel: b.propertyLabel?.value,
+        value: b.value.value,
+        valueLabel: b.valueLabel?.value
+    }))
 }
 
 function convertToTEI(item) {
