@@ -58,28 +58,31 @@ document.getElementById('download-btn').addEventListener('click', function() {
     URL.revokeObjectURL(url);
 });
 
-async function fetchWikidataItem(id) {
-    const query = `
-    SELECT ?property ?propertyLabel ?value ?valueLabel WHERE {
-        wd:${id} ?property ?value .
-        SERVICE wikibase:label { bd:serviceParam wikibase:language "it,en". }
-    }`
+async function getClaimValue(claims, propertyId) {
+    const claim = claims[propertyId]
+    if (!claim || !claim[0]) return ''
 
-    const url = `https://query.wikidata.org/sparql?format=json&query=${encodeURIComponent(query)}`
+    const mainsnak = claim[0].mainsnak
+    if (!mainsnak || !mainsnak.datavalue) return ''
 
-    const response = await fetch(url)
-    if (!response.ok) {
-        throw new Error('Wikidata request failed')
+    const value = mainsnak.datavalue.value
+
+    // entity (QID)
+    if (mainsnak.datavalue.type === 'wikibase-entityid') {
+        return await getLabel(value.id)
     }
 
-    const data = await response.json()
+    // string
+    if (mainsnak.datavalue.type === 'string') {
+        return value
+    }
 
-    return data.results.bindings.map(b => ({
-        property: b.property.value,
-        propertyLabel: b.propertyLabel?.value,
-        value: b.value.value,
-        valueLabel: b.valueLabel?.value
-    }))
+    // time
+    if (mainsnak.datavalue.type === 'time') {
+        return value.time
+    }
+
+    return ''
 }
 
 function convertToTEI(item) {
@@ -159,15 +162,13 @@ function getClaimValue(claims, propertyId) {
 }
 
 function escapeXml(unsafe) {
-    return unsafe.replace(/[<>&'"]/g, function (c) {
-        switch (c) {
-            case '<': return '&lt;';
-            case '>': return '&gt;';
-            case '&': return '&amp;';
-            case "'": return '&#39;';
-            case '"': return '&quot;';
-        }
-    });
+    return String(unsafe).replace(/[<>&'"]/g, c => ({
+        '<': '&lt;',
+        '>': '&gt;',
+        '&': '&amp;',
+        "'": '&#39;',
+        '"': '&quot;'
+    }[c]))
 }
 
 function showLoading(show) {
