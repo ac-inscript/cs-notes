@@ -59,7 +59,7 @@ fetch('{{ "/epigraphy.json" | relative_url }}')
 
       // Mostra conteggio risultati
       const count = document.getElementById('resultCount')
-      count.textContent = `${filtered.length} risultato${filtered.length !== 1 ? 'i' : ''} trovato${filtered.length !== 1 ? 'i' : ''}`
+      count.textContent = `${filtered.length} risultato${filtered.length !== 1 ? 'risultato' : 'risultati'} trovato${filtered.length !== 1 ? 'trovato' : 'trovati'}`
     })
 
   })
