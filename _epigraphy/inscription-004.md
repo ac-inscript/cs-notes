@@ -1,7 +1,7 @@
 ---
 title: Inscription 004
 type of inscription: funerary
-layout: Record
+layout: record
 material: calcar
 provenance: Altinum
 findspot: Venezia
