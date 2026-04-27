@@ -4,10 +4,6 @@ title: About
 permalink: /about/
 ---
 
----
-layout: default
-title: About
----
 <h1>About Inscript</h1>
 <p>This project is an experimental database and converter designed to transform epigraphic data from Wikidata into TEI XML. </br>
 The intended workflow consists of extracting items from Wikidata, converting them into TEI XML format, and subsequently uploading them to the Epigraphic Archive and make them searchable as well.</br>
