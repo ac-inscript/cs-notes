@@ -4,7 +4,7 @@ title: About
 permalink: /about/
 ---
 
-# About Inscript
+# About
 
 This project is an experimental database and converter designed to transform epigraphic data from Wikidata into TEI XML. The intended workflow consists of extracting items from Wikidata, converting them into TEI XML format, and subsequently uploading them to the Epigraphic Archive and make them searchable as well.
 
