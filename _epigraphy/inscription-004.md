@@ -1,4 +1,3 @@
-
 ---
 title: Inscription 004
 type of inscription: funerary
