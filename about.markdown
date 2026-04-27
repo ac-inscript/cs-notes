@@ -11,7 +11,7 @@ At present, the archive only contains a set of mock inscriptions, and is therefo
 The next step is to establish a reliable method for accessing Wikidata (e.g. via API or SPARQL queries), which will enable the implementation of the data retrieval process.</br>
 
 <h2>Points to consider:</h2>
-- how to access Wikidata (API vs SPARQL queries);</br>
-- how to structure and store inscriptions in TEI XML (possibly reusing the schema adopted for the mock data);</br>
-- how to manage Wikidata qualifiers (e.g. dates, measurements, and other contextual metadata).</br>
+* how to access Wikidata (API vs SPARQL queries);
+* how to structure and store inscriptions in TEI XML (possibly reusing the schema adopted for the mock data);
+* how to manage Wikidata qualifiers (e.g. dates, measurements, and other contextual metadata).
 </p>
