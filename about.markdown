@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Inscript
+title: About
 permalink: /about/
 ---
 
