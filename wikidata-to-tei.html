@@ -41,7 +41,7 @@ document.getElementById('convert-btn').addEventListener('click', async function(
         const teiXml = convertToTEI(data);
         showResult(teiXml);
     } catch (error) {
-        showError('Errore nel recupero dei dati: ' + error.message);
+        showError('Error: ' + error.message);
     } finally {
         showLoading(false);
     }
@@ -62,7 +62,7 @@ async function fetchWikidataItem(id) {
     const url = `https://www.wikidata.org/wiki/Special:EntityData/${id}.json`;
     const response = await fetch(url);
     if (!response.ok) {
-        throw new Error('Item non trovato');
+        throw new Error('Item not found');
     }
     const data = await response.json();
     return data.entities[id];
@@ -84,6 +84,7 @@ function convertToTEI(item) {
     const date = getClaimValue(claims, 'P571') || ''; // inception
     const language = getClaimValue(claims, 'P407') || ''; // language of work
     const image = getClaimValue(claims, 'P18') || ''; // image
+    // how to handle qualifiers?
 
     // Costruisci TEI XML
     const tei = `<?xml version="1.0" encoding="UTF-8"?>
