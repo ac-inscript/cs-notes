@@ -94,6 +94,10 @@ function convertToTEI(item) {
     const placeOfOrigin = getClaimValue(claims, 'P1071') || ''; // location of creation
     const findspot = getClaimValue(claims, 'P189') || ''; // Findspot and circumstances/context
     const typeOfText = getClaimValue(claims, 'P31') || ''; // instance of (type of text)
+    const EDR = getClaimValue(claims, 'P12495') || ''; // publication
+    const EDCS = getClaimValue(claims, 'P11656') || ''; // publication
+    const EDH = getClaimValue(claims, 'P11273') || ''; // publication
+    const TM = getClaimValue(claims, 'P8532') || ''; //
 
     // Costruisci TEI XML
     const tei = `<?xml version="1.0" encoding="UTF-8"?>
@@ -156,17 +160,11 @@ function convertToTEI(item) {
                     ${linesWithLb}
                 </ab>
             </div>
-            <div type="apparatus">
-                <p>external apparatus criticus (if applicable)</p>
-            </div>
-            <div type="translation">
-                <p>translation(s)</p>
-            </div>
-            <div type="commentary">
-                <p>commentary</p>
-            </div>
             <div type="bibliography">
-                <p>bibliography of previous editions, discussion, etc.</p>
+                <p>${escapeXml(EDR)}</p>
+                <p>${escapeXml(EDCS)}</p>
+                <p>${escapeXml(EDH)}</p>
+                <p>${escapeXml(TM)}</p>
             </div>
         </body>
     </text>
