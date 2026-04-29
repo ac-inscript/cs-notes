@@ -80,7 +80,7 @@ function convertToTEI(item) {
     // Mappa proprietà Wikidata a TEI
     const inscriptionText = getClaimValue(claims, 'P1680') || ''; // text of the inscription
     const lines = inscriptionText.split('|'); // assuming lines are separated by pipes in the text claim
-    const linesWithLb = lines.map((line, index) => `<lb n="${index + 1}"/>${escapeXml(line)}`).join(''); // add line breaks with numbering
+    const linesWithLb = lines.map((line, index) => `<lb n="${index + 1}"/>${escapeXml(line)}`).join('\n'); // add line breaks with numbering
     const material = getClaimValue(claims, 'P186') || ''; // material used
     const location = getClaimValue(claims, 'P276') || ''; // location
     const date = getClaimValue(claims, 'P571') || ''; // inception
