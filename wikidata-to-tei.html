@@ -83,11 +83,19 @@ function convertToTEI(item) {
     const location = getClaimValue(claims, 'P276') || ''; // location
     const date = getClaimValue(claims, 'P571') || ''; // inception
     const language = getClaimValue(claims, 'P407') || ''; // language of work
-    const image = getClaimValue(claims, 'P18') || ''; // image
+    const facsimileUrl = getClaimValue(claims, 'P18') || ''; // facsimile
+    const museum = getClaimValue(claims, 'P195') || ''; // collection/museum
+    const inventoryNumber = getClaimValue(claims, 'P217') || ''; //inventory number
+    const typeOfObject = getClaimValue(claims, 'P31') || ''; // instance of (type of object/monument)
+    const dimensions = getClaimValue(claims, 'P2610') || ''; // dimensions
+    const letterHeights = getClaimValue(claims, 'P12549') || ''; // letter heights
+    const placeOfOrigin = getClaimValue(claims, 'P1071') || ''; // location of creation
+    const findspot = getClaimValue(claims, 'P189') || ''; // Findspot and circumstances/context
+    const typeOfText = getClaimValue(claims, 'P31') || ''; // instance of (type of text)
 
     // Costruisci TEI XML
     const tei = `<?xml version="1.0" encoding="UTF-8"?>
-<TEI xmlns="http://www.tei-c.org/ns/1.0">
+<TEI xml:space="preserve" xml:lang="en" xmlns="http://www.tei-c.org/ns/1.0">
     <teiHeader>
         <fileDesc>
             <titleStmt>
@@ -95,33 +103,72 @@ function convertToTEI(item) {
                 ${description ? `<title type="sub">${escapeXml(description)}</title>` : ''}
             </titleStmt>
             <publicationStmt>
-                <p>Converted from Wikidata item ${item.id}</p>
+                <authority>Converted from Wikidata item ${item.id}</authority>
             </publicationStmt>
             <sourceDesc>
-                <p>Wikidata: <ref target="https://www.wikidata.org/wiki/${item.id}">${item.id}</ref></p>
+                <msDesc>
+                    <msIdentifier>
+                        <repository>${escapeXml(museum || archive)}</repository>
+                        <idno>${escapeXml(inventoryNumber)}</idno>
+                    </msIdentifier>
+                    <physDesc>
+                        <objectDesc>
+                            <supportDesc>
+                                <support>
+                                    <material>${escapeXml(material)}</material>
+                                    <objectType>${escapeXml(typeOfObject)}</objectType>
+                                    <dimensions>${escapeXml(dimensions)}</dimensions>
+                                </support>
+                            </supportDesc>
+                        </objectDesc>
+                        <handDesc>
+                            <height>${escapeXml(letterHeights)}</height>
+                        </handDesc>
+                    </physDesc>
+                    <history>
+                        <origin>
+                            <origPlace>${escapeXml(placeOfOrigin)}</origPlace>
+                            <origDate>${escapeXml(date)}</origDate>
+                        </origin>
+                        <provenance type="found">${escapeXml(findspot)}</provenance>
+                        <provenance type="observed">${escapeXml(location)}</provenance>
+                    </history>
+                </msDesc>
             </sourceDesc>
         </fileDesc>
         <profileDesc>
             <textClass>
                 <keywords>
-                    ${material ? `<term>${escapeXml(material)}</term>` : ''}
-                    ${language ? `<term>${escapeXml(language)}</term>` : ''}
+                    <term>${escapeXml(typeOfText)}</term>
                 </keywords>
             </textClass>
         </profileDesc>
     </teiHeader>
+    <facsimile>
+        <graphic url="${escapeXml(facsimileUrl)}"/>
+    </facsimile>
     <text>
         <body>
-            <div type="edition">
-                ${inscriptionText ? `<ab>${escapeXml(inscriptionText)}</ab>` : ''}
+            <div type="edition" xml:space="preserve">
+                <ab>
+                    <lb n="1"/>Greek or Latin (etc.) text here
+                </ab>
             </div>
-            ${image ? `<div type="facsimile"><figure><graphic url="${escapeXml(image)}"/></figure></div>` : ''}
-            <div type="metadata">
-                ${location ? `<p>Location: ${escapeXml(location)}</p>` : ''}
-                ${date ? `<p>Date: ${escapeXml(date)}</p>` : ''}
+            <div type="apparatus">
+                <p>external apparatus criticus (if applicable)</p>
+            </div>
+            <div type="translation">
+                <p>translation(s)</p>
+            </div>
+            <div type="commentary">
+                <p>commentary</p>
+            </div>
+            <div type="bibliography">
+                <p>bibliography of previous editions, discussion, etc.</p>
             </div>
         </body>
     </text>
+
 </TEI>`;
 
     return tei;
