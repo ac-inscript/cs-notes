@@ -173,7 +173,7 @@ function convertToTEI(item) {
         <body>
             <div type="edition" xml:space="preserve">
                 <ab>
-                    ${linesWithLb}
+                    ${inscriptionText ? `<p>${escapeXml(inscriptionText)}</p>` : ''}
                 </ab>
             </div>
             <div type="bibliography">
