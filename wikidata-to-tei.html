@@ -97,9 +97,6 @@ function convertToTEI(item) {
 
     // Map properties from Wikidata to TEI
     const inscriptionText = getClaimValue(claims, 'P1684') || ''; // text of the inscription
-    const lines = inscriptionText.split('/'); // assuming lines are separated by pipes in the text claim
-    console.log("TEXT:", inscriptionText); console.log("LINES:", lines);
-    const linesWithLb = lines.map((line, index) => `<lb n="${index + 1}"/>${escapeXml(line)}`).join('\n'); // add line breaks with numbering
     const material = getClaimValue(claims, 'P186') || ''; // material used
     const location = getClaimValue(claims, 'P276') || ''; // location
     const date = getClaimValue(claims, 'P571') || ''; // inception
