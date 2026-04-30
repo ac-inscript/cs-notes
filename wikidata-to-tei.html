@@ -175,7 +175,7 @@ function convertToTEI(item) {
         <body>
             <div type="edition" xml:space="preserve">
                 <ab>
-                    ${escapeXml(inscriptionText)}
+                    ${escapeXml(linesWithLb)}
                 </ab>
             </div>
             <div type="bibliography">
@@ -192,6 +192,7 @@ function convertToTEI(item) {
     return tei;
 }
 
+// Sanitize/escape a string for XML/HTML, i.e. to convert special characters into safe entities
 function escapeXml(unsafe) {
     return String(unsafe).replace(/[<>&'"]/g, c => ({
         '<': '&lt;',
@@ -223,6 +224,13 @@ function showError(message) {
     document.getElementById('error').textContent = message;
     document.getElementById('error').style.display = 'block';
 }
+
+document.getElementById('wikidata-id').addEventListener('keypress', function(event) {
+    if (event.key === 'Enter') {
+        event.preventDefault();
+        document.getElementById('convert-btn').click();
+    }
+});
 
 // Event listeners
 document.getElementById('convert-btn').addEventListener('click', async function() {
