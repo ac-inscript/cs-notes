@@ -46,7 +46,7 @@
             background: #ffffff; /
         }
         .section {
-            margin-bottom: 28px
+            margin-bottom: 28px;
         }
         .section p {
             margin: 0 8px 14px;
@@ -57,6 +57,25 @@
             margin: 0 0 12px;
             font-size: 1.4rem;
             color: #8994e5;
+        }
+        .section-row {
+            display: flex;
+            gap: 20px;
+            align-items: flex-start;
+            flex-wrap: wrap;
+        }
+        .section-row .text {
+            flex: 1;
+            min-width: 260px;
+        }
+        .section-row .side-image {
+            width: 260px;
+            max-width: 100%;
+        }
+        .section-row .side-image img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
         }
         input {
             padding: 8px;
@@ -86,16 +105,23 @@
             <header class="hero">
                 <h1>My exercises</h1>
                 <h2>JavaScript</h2>
-                <img src="Grace on rainbow.jpg" alt="Grace on rainbow" style="width: 300px; height: auto;"><br>
+                <img src="hex palette.jpg" alt="Hex palette" style="width: 300px; height: auto;"><br>
             </header>
             <main class="content">
                 <section class="section">
-                    <h3>Mixing colours</h3>
-                    <p>Insert the hex code without # and click on 'Mix'.</p>
-                    <input id="c1" type="text" placeholder="Colour 1 (e.g., FF0000)">
-                    <input id="c2" type="text" placeholder="Colour 2 (e.g., 00FF00)">
-                    <button id="mixButton">Mix</button>
-                    <div id="result" style="margin-top:20px;"></div>
+                    <div class="section-row">
+                        <div class="text">
+                            <h3>Mixing colours</h3>
+                            <p>Insert the hex code without # and click on 'Mix'.</p>
+                            <input id="c1" type="text" placeholder="Colour 1 (e.g., FF0000)">
+                            <input id="c2" type="text" placeholder="Colour 2 (e.g., 00FF00)">
+                            <button id="mixButton">Mix</button>
+                            <div id="result" style="margin-top:20px;"></div>
+                        </div>
+                        <div class="side-image">
+                            <img src="hex palette.jpg" alt="Hex palette">
+                        </div>
+                    </div>
                 </section>
             </main>
             <footer>
