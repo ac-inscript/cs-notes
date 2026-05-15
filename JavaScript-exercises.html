@@ -90,18 +90,17 @@
                 <h2>JavaScript</h2>
                 <img src="Grace on rainbow.jpg" alt="Grace on rainbow" style="width: 300px; height: auto;"><br>
             </header>
+            <main class="content">
+                <section class="section">
+                    <h1>Mixing colours</h1>
+                    <p>Insert the hex code without # and click on 'Mix'.</p>
+                    <input id="c1" type="text" placeholder="Colour 1 (e.g., FF0000)">
+                    <input id="c2" type="text" placeholder="Colour 2 (e.g., 00FF00)">
+                    <button id="mixButton">Mix</button>
+                    <div id="result" style="margin-top:20px;"></div>
+                </section>
+            </main>
         </div>
-    </div>
-        <main class="content">
-            <section class="section">
-                <h1>Mixing colours</h1>
-                <p>Insert the decimal code without # and click on 'MIX'.</p>
-                <input id="c1" type="text" placeholder="Colour 1 (e.g., FF0000)">
-                <input id="c2" type="text" placeholder="Colour 2 (e.g., 00FF00)">
-                <button id="mixButton">Mix</button>
-                <div id="result" style="margin-top:20px;"></div>
-            </section>
-        </main>
     </div>
     <script>
         function mix(hex1, hex2) {
@@ -127,8 +126,8 @@
                 <div style="width:100px; height:50px; background:${result}; border:1px solid #000;"></div>
             `;
         }
-
         document.getElementById("mixButton").addEventListener("click", showMix);
     </script>
 </body>
-        
+</html>
+
