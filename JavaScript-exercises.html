@@ -7,7 +7,7 @@
     <style>
         body {
             margin: 0;
-            font-family: 'Tahoma', Geneva, Verdana, sans-serif;
+            font-family: 'Roboto Condensed', Roboto;
             background: #ffffff;
             color: #000000;
         } 
@@ -58,6 +58,20 @@
             font-size: 1.4rem;
             color: #8994e5;
         }
+        input {
+            padding: 8px;
+            margin-right: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            padding: 8px 16px;
+            border: none;
+            background: #8994e5;
+            color: #ffffff;
+            border-radius: 4px;
+            cursor: pointer;
+        }
         footer {
             padding: 24px 28px;
             background: #8994e5;
@@ -103,7 +117,6 @@
                 b.toString(16).padStart(2, "0")
             );
         }
-
         function showMix() {
             const hex1 = document.getElementById("c1").value.trim();
             const hex2 = document.getElementById("c2").value.trim();
