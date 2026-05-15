@@ -112,9 +112,66 @@
                     <div class="section-row">
                         <div class="text">
                             <h3>Mixing colours</h3>
-                            <p>Insert the hex code without # and click on 'Mix'.</p>
-                            <input id="c1" type="text" placeholder="Colour 1 (e.g., FF0000)">
-                            <input id="c2" type="text" placeholder="Colour 2 (e.g., 00FF00)">
+                            <p>Select two colours from the dropdown list and click on 'Mix'.</p>
+                            <select id="colorSelect1" style="padding: 8px; border-radius: 6px;">
+                                <option value="FF0000" style="background:#FF0000; color:white;">Red</option>
+                                <option value="00FF00" style="background:#00FF00; color:white;">Green</option>
+                                <option value="0000FF" style="background:#0000FF; color:white;">Blue</option>
+                                <option value="FFFF00" style="background:#FFFF00; color:black;">Yellow</option>
+                                <option value="FF00FF" style="background:#FF00FF; color:white;">Magenta</option>
+                                <option value="00FFFF" style="background:#00FFFF; color:black;">Cyan</option>
+                                <option value="000000" style="background:#000000; color:white;">Black</option>
+                                <option value="FFFFFF" style="background:#FFFFFF; color:black;">White</option>
+                                <option value="FFA500" style="background:#FFA500; color:black;">Orange</option>
+                                <option value="800080" style="background:#800080; color:white;">Purple</option>
+                                <option value="A52A2A" style="background:#A52A2A; color:white;">Brown</option>
+                                <option value="FFC0CB" style="background:#FFC0CB; color:black;">Pink</option>
+                                <option value="808080" style="background:#808080; color:white;">Gray</option>
+                                <option value="008000" style="background:#008000; color:white;">Dark Green</option>
+                                <option value="000080" style="background:#000080; color:white;">Navy</option>
+                                <option value="AACC96" style="background:#AACC96; color:black;">TEA GREEN</option>
+                                <option value="25533F" style="background:#25533F; color:white;">FOREST</option>
+                                <option value="F4BEAE" style="background:#F4BEAE; color:black;">PEACH</option>
+                                <option value="52A5CE" style="background:#52A5CE; color:white;">BLUE BERRY</option>
+                                <option value="FF7BAC" style="background:#FF7BAC; color:black;">BUBBLE-GUM</option>
+                                <option value="876029" style="background:#876029; color:white;">DRY EARTH</option>
+                                <option value="6D1F42" style="background:#6D1F42; color:white;">GRAPE JUICE</option>
+                                <option value="D3B6D3" style="background:#D3B6D3; color:black;">LILACS</option>
+                                <option value="EFCE7B" style="background:#EFCE7B; color:black;">BUTTER YELLOW</option>
+                                <option value="B8CEE8" style="background:#B8CEE8; color:black;">ICED BLUE</option>
+                                <option value="EF6F3C" style="background:#EF6F3C; color:white;">BLOOD ORANGE</option>
+                                <option value="AFAB23" style="background:#AFAB23; color:black;">OLIVE GREEN</option>
+
+                            </select>
+                            <select id="colorSelect2" style="padding: 8px; border-radius: 6px;">
+                                <option value="FF0000" style="background:#FF0000; color:white;">Red</option>
+                                <option value="00FF00" style="background:#00FF00; color:white;">Green</option>
+                                <option value="0000FF" style="background:#0000FF; color:white;">Blue</option>
+                                <option value="FFFF00" style="background:#FFFF00; color:black;">Yellow</option>
+                                <option value="FF00FF" style="background:#FF00FF; color:white;">Magenta</option>
+                                <option value="00FFFF" style="background:#00FFFF; color:black;">Cyan</option>
+                                <option value="000000" style="background:#000000; color:white;">Black</option>
+                                <option value="FFFFFF" style="background:#FFFFFF; color:black;">White</option>
+                                <option value="FFA500" style="background:#FFA500; color:black;">Orange</option>
+                                <option value="800080" style="background:#800080; color:white;">Purple</option>
+                                <option value="A52A2A" style="background:#A52A2A; color:white;">Brown</option>
+                                <option value="FFC0CB" style="background:#FFC0CB; color:black;">Pink</option>
+                                <option value="808080" style="background:#808080; color:white;">Gray</option>
+                                <option value="008000" style="background:#008000; color:white;">Dark Green</option>
+                                <option value="000080" style="background:#000080; color:white;">Navy</option>
+                                <option value="AACC96" style="background:#AACC96; color:black;">TEA GREEN</option>
+                                <option value="25533F" style="background:#25533F; color:white;">FOREST</option>
+                                <option value="F4BEAE" style="background:#F4BEAE; color:black;">PEACH</option>
+                                <option value="52A5CE" style="background:#52A5CE; color:white;">BLUE BERRY</option>
+                                <option value="FF7BAC" style="background:#FF7BAC; color:black;">BUBBLE-GUM</option>
+                                <option value="876029" style="background:#876029; color:white;">DRY EARTH</option>
+                                <option value="6D1F42" style="background:#6D1F42; color:white;">GRAPE JUICE</option>
+                                <option value="D3B6D3" style="background:#D3B6D3; color:black;">LILACS</option>
+                                <option value="EFCE7B" style="background:#EFCE7B; color:black;">BUTTER YELLOW</option>
+                                <option value="B8CEE8" style="background:#B8CEE8; color:black;">ICED BLUE</option>
+                                <option value="EF6F3C" style="background:#EF6F3C; color:white;">BLOOD ORANGE</option>
+                                <option value="AFAB23" style="background:#AFAB23; color:black;">OLIVE GREEN</option>
+                            </select>
                             <button id="mixButton">Mix</button>
                             <div id="result" style="margin-top:20px;"></div>
                         </div>
@@ -144,8 +201,8 @@
             );
         }
         function showMix() {
-            const hex1 = document.getElementById("c1").value.trim();
-            const hex2 = document.getElementById("c2").value.trim();
+            const hex1 = document.getElementById("colorSelect1").value.trim();
+            const hex2 = document.getElementById("colorSelect2").value.trim();
             const result = mix(hex1, hex2);
             document.getElementById("result").innerHTML = `
                 <p>Resulting colour: <strong>${result}</strong></p>
