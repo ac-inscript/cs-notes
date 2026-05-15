@@ -99,7 +99,7 @@
                 <input id="c1" type="text" placeholder="Colour 1 (e.g., FF0000)">
                 <input id="c2" type="text" placeholder="Colour 2 (e.g., 00FF00)">
                 <button id="mixButton">Mix</button>
-                <div id="risultato" style="margin-top:20px;"></div>
+                <div id="result" style="margin-top:20px;"></div>
             </section>
         </main>
     </div>
@@ -123,7 +123,7 @@
             const hex2 = document.getElementById("c2").value.trim();
             const result = mix(hex1, hex2);
             document.getElementById("result").innerHTML = `
-                <p>Colore risultante: <strong>${result}</strong></p>
+                <p>Resulting colour: <strong>${result}</strong></p>
                 <div style="width:100px; height:50px; background:${result}; border:1px solid #000;"></div>
             `;
         }
